@@ -1,0 +1,406 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BF06A16D-A574-4FB5-9A57-5CBDDBA6058F}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>FormulaCalculator</RootNamespace>
+    <AssemblyName>Witherbit Calculator</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Witherbit Calculator\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>keys.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemGroup>
+    <Reference Include="MaterialDesignColors, Version=2.1.4.0, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.2.1.4\lib\net462\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=4.9.0.0, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.4.9.0\lib\net462\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis, Version=4.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeAnalysis.Common.4.8.0\lib\netstandard2.0\Microsoft.CodeAnalysis.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.CSharp, Version=4.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeAnalysis.CSharp.4.8.0\lib\netstandard2.0\Microsoft.CodeAnalysis.CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.Scripting, Version=4.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeAnalysis.Scripting.Common.4.8.0\lib\netstandard2.0\Microsoft.CodeAnalysis.Scripting.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.39\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="org.matheval, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\org.matheval.1.0.0.3\lib\net48\org.matheval.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Immutable, Version=7.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.7.0.0\lib\net462\System.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection.Metadata, Version=7.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reflection.Metadata.7.0.0\lib\net462\System.Reflection.Metadata.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encoding.CodePages, Version=7.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encoding.CodePages.7.0.0\lib\net462\System.Text.Encoding.CodePages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Controls\CalcKeyboard.xaml.cs">
+      <DependentUpon>CalcKeyboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FunkKeyboard.xaml.cs">
+      <DependentUpon>FunkKeyboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\VariableItem.xaml.cs">
+      <DependentUpon>VariableItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MathControls\AbsControl.xaml.cs">
+      <DependentUpon>AbsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MathControls\ACosControl.xaml.cs">
+      <DependentUpon>ACosControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MathControls\ASinControl.xaml.cs">
+      <DependentUpon>ASinControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MathControls\ATanControl.xaml.cs">
+      <DependentUpon>ATanControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MathControls\BracketsControl.xaml.cs">
+      <DependentUpon>BracketsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MathControls\CeilControl.xaml.cs">
+      <DependentUpon>CeilControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MathControls\CosControl.xaml.cs">
+      <DependentUpon>CosControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MathControls\DegControl.xaml.cs">
+      <DependentUpon>DegControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MathControls\DivideControl.xaml.cs">
+      <DependentUpon>DivideControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MathControls\DivideExtraControl.xaml.cs">
+      <DependentUpon>DivideExtraControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MathControls\FloorControl.xaml.cs">
+      <DependentUpon>FloorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MathControls\LnControl.xaml.cs">
+      <DependentUpon>LnControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MathControls\LogControl.xaml.cs">
+      <DependentUpon>LogControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MathControls\MinusControl.xaml.cs">
+      <DependentUpon>MinusControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MathControls\ModControl.xaml.cs">
+      <DependentUpon>ModControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MathControls\MultiplyControl.xaml.cs">
+      <DependentUpon>MultiplyControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MathControls\NsqrtControl.xaml.cs">
+      <DependentUpon>NsqrtControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MathControls\NumberControl.xaml.cs">
+      <DependentUpon>NumberControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MathControls\PlusControl.xaml.cs">
+      <DependentUpon>PlusControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MathControls\PowControl.xaml.cs">
+      <DependentUpon>PowControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MathControls\RoundControl.xaml.cs">
+      <DependentUpon>RoundControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MathControls\SinControl.xaml.cs">
+      <DependentUpon>SinControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MathControls\SqrtControl.xaml.cs">
+      <DependentUpon>SqrtControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MathControls\TanControl.xaml.cs">
+      <DependentUpon>TanControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Math\Elements\AbsElement.cs" />
+    <Compile Include="Math\Elements\ACosElement.cs" />
+    <Compile Include="Math\Elements\ASinElement.cs" />
+    <Compile Include="Math\Elements\ATanElement.cs" />
+    <Compile Include="Math\Elements\BracketsElement.cs" />
+    <Compile Include="Math\Elements\CeilElement.cs" />
+    <Compile Include="Math\Elements\CosElement.cs" />
+    <Compile Include="Math\Elements\DegElement.cs" />
+    <Compile Include="Math\Elements\DivideElement.cs" />
+    <Compile Include="Math\Elements\FloorElement.cs" />
+    <Compile Include="Math\Elements\LnElement.cs" />
+    <Compile Include="Math\Elements\LogElement.cs" />
+    <Compile Include="Math\Elements\NumberElement.cs" />
+    <Compile Include="Math\Elements\PowElement.cs" />
+    <Compile Include="Math\Elements\PowSqrtElement.cs" />
+    <Compile Include="Math\Elements\RoundElement.cs" />
+    <Compile Include="Math\Elements\SinElement.cs" />
+    <Compile Include="Math\Elements\SqrtElement.cs" />
+    <Compile Include="Math\Elements\TanElement.cs" />
+    <Compile Include="Math\Elements\VariableElement.cs" />
+    <Compile Include="Math\Enums\Constants.cs" />
+    <Compile Include="Math\Enums\Operator.cs" />
+    <Compile Include="Math\IMathElement.cs" />
+    <Compile Include="Math\IMathIterator.cs" />
+    <Compile Include="Math\IMathNumerable.cs" />
+    <Compile Include="Math\MathIterator.cs" />
+    <Compile Include="Math\MathNumerable.cs" />
+    <Compile Include="Math\Operators\DivideOperator.cs" />
+    <Compile Include="Math\Operators\MinusOperator.cs" />
+    <Compile Include="Math\Operators\ModOperator.cs" />
+    <Compile Include="Math\Operators\MultiplyOperator.cs" />
+    <Compile Include="Math\Operators\PlusOperator.cs" />
+    <Compile Include="Math\Utils\ElementsHandler.cs" />
+    <Compile Include="Math\Utils\Evaluator.cs" />
+    <Compile Include="Math\Utils\Stack.cs" />
+    <Compile Include="WhiteByte\Tools\MathExpression.cs" />
+    <Compile Include="WhiteByte\Utils\Extensions.cs" />
+    <Compile Include="WhiteByte\Utils\UiExtensions.cs" />
+    <Page Include="Controls\CalcKeyboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\FunkKeyboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\VariableItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="MathControls\AbsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MathControls\ACosControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MathControls\ASinControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MathControls\ATanControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MathControls\BracketsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MathControls\CeilControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MathControls\CosControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MathControls\DegControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MathControls\DivideControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MathControls\DivideExtraControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MathControls\FloorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MathControls\LnControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MathControls\LogControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MathControls\MinusControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MathControls\ModControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MathControls\MultiplyControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MathControls\NsqrtControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MathControls\NumberControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MathControls\PlusControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MathControls\PowControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MathControls\RoundControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MathControls\SinControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MathControls\SqrtControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MathControls\TanControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\ScrollBarStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Diagrams\View.cd" />
+    <None Include="Diagrams\Controls.cd" />
+    <None Include="Diagrams\Elements.cd" />
+    <None Include="Diagrams\Iterator.cd" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.4\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
+    <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.4\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="keys.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets'))" />
+  </Target>
+</Project>

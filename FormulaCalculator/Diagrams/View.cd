@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="FormulaCalculator.Math.Utils.Stack">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAEEAIBCAAAABEwiAEEAAKAAEBQEFQAABAAAA=</HashCode>
+      <FileName>Math\Utils\Stack.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FormulaCalculator.Math.Utils.ElementsHandler">
+    <Position X="8" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Math\Utils\ElementsHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FormulaCalculator.MainWindow">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAEBYAIAAEAAAiAACQBgIAAAAAAAAQAAAAQAAACA=</HashCode>
+      <FileName>MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="FormulaCalculator.Math.IMathElement">
+    <Position X="8" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAQAAAAACAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Math\IMathElement.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
