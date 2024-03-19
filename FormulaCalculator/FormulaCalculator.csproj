@@ -398,7 +398,9 @@
   <ItemGroup>
     <Resource Include="keys.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Assets\calc.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\pwitherl.png" />
   </ItemGroup>
