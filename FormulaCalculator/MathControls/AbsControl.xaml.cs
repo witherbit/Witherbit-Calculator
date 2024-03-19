@@ -26,11 +26,11 @@ namespace FormulaCalculator.MathControls
         //описание графического элемента с одним стеком
         internal Stack ThisStack { get; private set; }  //стек элемента
         internal AbsElement Element { get; private set; } //элемент
-        public AbsControl()
+        public AbsControl(Stack parent)
         {
             InitializeComponent();
             Element = new AbsElement(this); //создаем жлемент и передаем ему Instance текущего графического элемента
-            ThisStack = Stack.AddStack(new Stack(uiInput, this));   //создаем стек
+            ThisStack = Stack.AddStack(new Stack(uiInput, this) { Parent = parent, InnerIndex = parent.LastFocusedIndex });   //создаем стек
             ThisStack.Reset();              //устанавливаем элементы стека в первоначальное положение
         }
     }

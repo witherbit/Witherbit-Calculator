@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WhiteByte.Utils;
 
 namespace FormulaCalculator.MathControls
 {
@@ -26,12 +27,15 @@ namespace FormulaCalculator.MathControls
         internal Stack ThisStack {  get; private set; }
         internal Stack ThisPowStack { get; private set; }
         internal PowElement Element { get; private set; }
-        public PowControl()
+        public PowControl(Stack parent)
         {
             InitializeComponent();
+            var brushHigh = 0x1000000.GenerateRandomColor().GetBrush();
+            uiHigh1.Foreground = brushHigh;
+            uiHigh2.Foreground = brushHigh;
             Element = new PowElement(this);
-            ThisStack = Stack.AddStack(new Stack(uiInput, this));
-            ThisPowStack = Stack.AddStack(new Stack(uiPowInput, this));
+            ThisStack = Stack.AddStack(new Stack(uiInput, this) { Parent = parent, InnerIndex = parent.LastFocusedIndex });
+            ThisPowStack = Stack.AddStack(new Stack(uiPowInput, this) { Parent = parent, InnerIndex = parent.LastFocusedIndex });
             ThisPowStack.IsPow = true;
             ThisPowStack.MinWidth = 10;
             ThisPowStack.MinHeight = 10;

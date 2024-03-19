@@ -39,6 +39,9 @@ namespace FormulaCalculator.Controls
                 case "Br2":
                     button.Background = "#ffb397".GetBrush();
                     break;
+                case "MinusX":
+                    button.Background = "#ffb397".GetBrush();
+                    break;
 
                 case "NSqrt":
                     button.Background = "#9cffe7".GetBrush();
@@ -93,6 +96,9 @@ namespace FormulaCalculator.Controls
                 case "Br2":
                     button.Background = "#ff956e".GetBrush();
                     break;
+                case "MinusX":
+                    button.Background = "#ff956e".GetBrush();
+                    break;
 
                 case "NSqrt":
                     button.Background = "#49e8c2".GetBrush();
@@ -144,6 +150,9 @@ namespace FormulaCalculator.Controls
                 case "Br1":
                     OnClick?.Invoke(this, "(");
                     break;
+                case "MinusX":
+                    OnClick?.Invoke(this, "minX");
+                    break;
 
                 case "NSqrt":
                     OnClick?.Invoke(this, "nsqrt");
@@ -182,6 +191,30 @@ namespace FormulaCalculator.Controls
 
                 default:
                     OnClick?.Invoke(this, name);
+                    break;
+            }
+        }
+
+        private void Border_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            var button = sender as Border;
+            var name = button.Name.Replace("uiButton", "");
+            switch (name)
+            {
+                case "Div":
+                    OnClick?.Invoke(this, "f/");
+                    break;
+                case "Mul":
+                    OnClick?.Invoke(this, "f*");
+                    break;
+                case "Plus":
+                    OnClick?.Invoke(this, "f+");
+                    break;
+                case "Minus":
+                    OnClick?.Invoke(this, "f-");
+                    break;
+                case "Mod":
+                    OnClick?.Invoke(this, "f%");
                     break;
             }
         }

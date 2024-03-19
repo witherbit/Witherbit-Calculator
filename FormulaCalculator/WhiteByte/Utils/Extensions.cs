@@ -54,5 +54,11 @@ namespace WhiteByte.Utils
         {
             control.SetFocus();
         }
+
+        public static string GenerateRandomColor(this int min)
+        {
+            var random = new Random(Guid.NewGuid().GetHashCode() + Environment.TickCount);
+            return string.Format("#{0:X6}", random.Next(min));
+        }
     }
 }

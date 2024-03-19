@@ -1,4 +1,5 @@
 ﻿using FormulaCalculator.MathControls;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,12 @@ using WhiteByte.Utils;
 
 namespace FormulaCalculator.Math.Utils
 {
-    internal class Stack
+    public class Stack
     {
         internal static List<Stack> General { get; private set; } = new List<Stack>();      //общий список элементов
-        internal static Stack Parent { get; private set; }                                  //родительский стек
+        internal static Stack SourceStack { get; private set; }                             //главный стек
+        internal Stack Parent { get; set; }                                                 //родительский стек
+        internal int InnerIndex { get; set; }                                               //not used
         internal static event EventHandler<string> Evaluate;                                //событие изменения значений
         internal static event EventHandler<string> Exception;                               //событие для отладки Evaluator'а
         internal object Instance { get; private set; }                                      //графический элемент, которому принадлежит текущий стек
@@ -25,6 +28,8 @@ namespace FormulaCalculator.Math.Utils
         internal double MinWidth { get; set; } = 30;                                        //минимальная ширина - нужна для отображения в виде степени или простого числа НЕ МЕНЯТЬ
         internal bool IsPow {  get; set; }                                                  //стек является стеком для степенных значений
         internal bool StackIsFocused { get => GetFocusedIndex() > -1; }                     //возвращает true, если фокус клавиатуры на текущем стеке
+
+        internal  int LastFocusedIndex { get; private set; }
 
         private void OnDeleteElement(object sender, EventArgs e)                            //метод, подписанный на событие, происходящее, когда пользователь хочет удалить элемент
         {
@@ -54,7 +59,7 @@ namespace FormulaCalculator.Math.Utils
                     OnEditElement(sender, null);
                 }
             }
-            else if (focused == 0 && GetFocusedStack() == this && GetFocusedStack() != Parent)      //редактирует ээлемент, превращая его из определеного элемента в элемент NumberControl
+            else if (focused == 0 && GetFocusedStack() == this && GetFocusedStack() != SourceStack && !GetFocusedStack().IsPow)      //редактирует ээлемент, превращая его из определеного элемента в элемент NumberControl
             {
                 ResetElement();
             }
@@ -64,7 +69,7 @@ namespace FormulaCalculator.Math.Utils
         {
             try
             {
-                Evaluate?.Invoke(this, Parent.Handler.Calculate().ToString());              //если получается посчитать выражение, то отправляем на вывод
+                Evaluate?.Invoke(this, SourceStack.Handler.Calculate().ToString());              //если получается посчитать выражение, то отправляем на вывод
             }
             catch (Exception ex)
             {
@@ -82,7 +87,7 @@ namespace FormulaCalculator.Math.Utils
         }
         public void SetParent()                                                             //устанавливает родительский стек (главный стек)
         {
-            Parent = this;
+            SourceStack = this;
         }
         public void Reset()                                                                 //восстанавливает значение стека по умолчанию
         {
@@ -138,6 +143,7 @@ namespace FormulaCalculator.Math.Utils
             }
             return -1;
         }
+        
         public NumberControl GetFocusedElement()                                            //получает NumberControl, на котором установлен фокус
         {
             for (int i = 0; i < Children.Count; i++)
@@ -154,10 +160,26 @@ namespace FormulaCalculator.Math.Utils
         public void Input(string input)                                                     //Ввод значений с программной клавиатуры редактора формул, определяет, какое значение передается
                                                                                             //и на его основе добавляет элемент/элементы, либо заполняет цифрами, константами или точкой NumberControl, на котором установлен фокус
         {
-            
             int focused = GetFocusedIndex();
             if (focused < 0)                       //если ни один элемент не имеет фокуса, то просто выходим из метода, потому что непонятно, куда и что добавлять без NumberControl с фокусом
                 return;
+            LastFocusedIndex = focused;
+            var parent = GetFocusedStack().Parent;
+            if (parent != null && parent.GetFocusedIndex() == -1)
+            {
+                //parent.LastFocusedIndex = GetFocusedStack().InnerIndex;
+                var fpanel = GetFocusedStack().Panel;
+                for(int i = 0; i < parent.Children.Count; i++)
+                {
+                    if (parent.Children[i] is NumberControl) continue;
+                    if (parent.Children[i] as UserControl is UserControl && (parent.Children[i] as UserControl).Content is StackPanel && ((parent.Children[i] as UserControl).Content as StackPanel).Children.Contains(fpanel))
+                    {
+                        parent.LastFocusedIndex = i;
+                        break;
+                    }
+                }
+            }
+
             var alignment = VerticalAlignment.Center;
             if (IsPow)
                 alignment = VerticalAlignment.Top;
@@ -166,7 +188,7 @@ namespace FormulaCalculator.Math.Utils
                 case "(":
                     Children.RemoveAt(focused);
                     Handler.Elements.RemoveAt(focused);
-                    var brackets = new BracketsControl()
+                    var brackets = new BracketsControl(this)
                     {
                         VerticalAlignment = alignment,
                         HorizontalAlignment = HorizontalAlignment.Center,
@@ -180,7 +202,7 @@ namespace FormulaCalculator.Math.Utils
                 case "nsqrt":
                     Children.RemoveAt(focused);
                     Handler.Elements.RemoveAt(focused);
-                    var nsqrt = new NsqrtControl()
+                    var nsqrt = new NsqrtControl(this)
                     {
                         VerticalAlignment = alignment,
                         HorizontalAlignment = HorizontalAlignment.Center,
@@ -193,7 +215,7 @@ namespace FormulaCalculator.Math.Utils
                 case "sqrt":
                     Children.RemoveAt(focused);
                     Handler.Elements.RemoveAt(focused);
-                    var sqrt = new SqrtControl()
+                    var sqrt = new SqrtControl(this)
                     {
                         VerticalAlignment = alignment,
                         HorizontalAlignment = HorizontalAlignment.Center,
@@ -206,7 +228,7 @@ namespace FormulaCalculator.Math.Utils
                 case "divide": //деление дробью
                     Children.RemoveAt(focused);
                     Handler.Elements.RemoveAt(focused);
-                    var divex = new DivideExtraControl()
+                    var divex = new DivideExtraControl(this)
                     {
                         VerticalAlignment = alignment,
                         HorizontalAlignment = HorizontalAlignment.Center,
@@ -219,7 +241,7 @@ namespace FormulaCalculator.Math.Utils
                 case "pow":
                     Children.RemoveAt(focused);
                     Handler.Elements.RemoveAt(focused);
-                    var pow = new PowControl()
+                    var pow = new PowControl(this)
                     {
                         VerticalAlignment = alignment,
                         HorizontalAlignment = HorizontalAlignment.Center,
@@ -232,7 +254,7 @@ namespace FormulaCalculator.Math.Utils
                 case "abs":
                     Children.RemoveAt(focused);
                     Handler.Elements.RemoveAt(focused);
-                    var abs = new AbsControl()
+                    var abs = new AbsControl(this)
                     {
                         VerticalAlignment = alignment,
                         HorizontalAlignment = HorizontalAlignment.Center,
@@ -249,6 +271,7 @@ namespace FormulaCalculator.Math.Utils
                         VerticalAlignment = VerticalAlignment.Center,
                         HorizontalAlignment = HorizontalAlignment.Center
                     };
+                    
                     Children.Insert(focused + 1, divide);
                     Handler.Elements.Insert(focused + 1, divide.Operator);
 
@@ -323,13 +346,105 @@ namespace FormulaCalculator.Math.Utils
                     numberMod.TryFocus();
                     Handler.Elements.Insert(focused + 2, numberMod.Element);
                     break;
+
+
+
+                case "f/":
+                    if (parent == null) break;
+                    var fdivide = new DivideControl()
+                    {
+                        VerticalAlignment = VerticalAlignment.Center,
+                        HorizontalAlignment = HorizontalAlignment.Center
+                    };
+                    parent.Children.Insert(parent.LastFocusedIndex + 1, fdivide);
+                    parent.Handler.Elements.Insert(parent.LastFocusedIndex + 1, fdivide.Operator);
+
+                    var fnumberDivide = parent.GetNewNumberControl();
+                    fnumberDivide.OnEdit += parent.OnEditElement;
+                    fnumberDivide.OnDelete += parent.OnDeleteElement;
+                    parent.Children.Insert(parent.LastFocusedIndex + 2, fnumberDivide);
+                    fnumberDivide.TryFocus();
+                    parent.Handler.Elements.Insert(parent.LastFocusedIndex + 2, fnumberDivide.Element);
+                    break;
+                case "f*":
+                    if (parent == null) break;
+                    var fmultiply = new MultiplyControl
+                    {
+                        VerticalAlignment = VerticalAlignment.Center,
+                        HorizontalAlignment = HorizontalAlignment.Center
+                    };
+                    parent.Children.Insert(parent.LastFocusedIndex + 1, fmultiply);
+                    parent.Handler.Elements.Insert(parent.LastFocusedIndex + 1, fmultiply.Operator);
+
+                    var fnumberMulti = parent.GetNewNumberControl();
+                    fnumberMulti.OnEdit += parent.OnEditElement;
+                    fnumberMulti.OnDelete += parent.OnDeleteElement;
+                    parent.Children.Insert(parent.LastFocusedIndex + 2, fnumberMulti);
+                    fnumberMulti.TryFocus();
+                    parent.Handler.Elements.Insert(parent.LastFocusedIndex + 2, fnumberMulti.Element);
+                    break;
+                case "f+":
+                    if (parent == null) break;
+                    var fplus = new PlusControl
+                    {
+                        VerticalAlignment = VerticalAlignment.Center,
+                        HorizontalAlignment = HorizontalAlignment.Center
+                    };
+                    parent.Children.Insert(parent.LastFocusedIndex + 1, fplus);
+                    parent.Handler.Elements.Insert(parent.LastFocusedIndex + 1, fplus.Operator);
+
+                    var fnumberPlus = parent.GetNewNumberControl();
+                    fnumberPlus.OnEdit += parent.OnEditElement;
+                    fnumberPlus.OnDelete += parent.OnDeleteElement;
+                    parent.Children.Insert(parent.LastFocusedIndex + 2, fnumberPlus);
+                    fnumberPlus.TryFocus();
+                    parent.Handler.Elements.Insert(parent.LastFocusedIndex + 2, fnumberPlus.Element);
+                    break;
+                case "f-":
+                    if (parent == null) break;
+                    var fminus = new MinusControl
+                    {
+                        VerticalAlignment = VerticalAlignment.Center,
+                        HorizontalAlignment = HorizontalAlignment.Center
+                    };
+                    parent.Children.Insert(parent.LastFocusedIndex + 1, fminus);
+                    parent.Handler.Elements.Insert(parent.LastFocusedIndex + 1, fminus.Operator);
+
+                    var fnumberMinus = parent.GetNewNumberControl();
+                    fnumberMinus.OnEdit += parent.OnEditElement;
+                    fnumberMinus.OnDelete += parent.OnDeleteElement;
+                    parent.Children.Insert(parent.LastFocusedIndex + 2, fnumberMinus);
+                    fnumberMinus.TryFocus();
+                    parent.Handler.Elements.Insert(parent.LastFocusedIndex + 2, fnumberMinus.Element);
+                    break;
+                case "f%":
+                    if (parent == null) break;
+                    var fmod = new ModControl
+                    {
+                        VerticalAlignment = VerticalAlignment.Center,
+                        HorizontalAlignment = HorizontalAlignment.Center
+                    };
+                    parent.Children.Insert(parent.LastFocusedIndex + 1, fmod);
+                    parent.Handler.Elements.Insert(parent.LastFocusedIndex + 1, fmod.Operator);
+
+                    var fnumberMod = parent.GetNewNumberControl();
+                    fnumberMod.OnEdit += parent.OnEditElement;
+                    fnumberMod.OnDelete += parent.OnDeleteElement;
+                    parent.Children.Insert(parent.LastFocusedIndex + 2, fnumberMod);
+                    fnumberMod.TryFocus();
+                    parent.Handler.Elements.Insert(parent.LastFocusedIndex + 2, fnumberMod.Element);
+                    break;
+
+
+
                 case ",":
                     (Children[focused] as NumberControl).Insert(".");
                     break;
+
                 case "sin":
                     Children.RemoveAt(focused);
                     Handler.Elements.RemoveAt(focused);
-                    var sin = new SinControl()
+                    var sin = new SinControl(this)
                     {
                         VerticalAlignment = alignment,
                         HorizontalAlignment = HorizontalAlignment.Center,
@@ -342,7 +457,7 @@ namespace FormulaCalculator.Math.Utils
                 case "cos":
                     Children.RemoveAt(focused);
                     Handler.Elements.RemoveAt(focused);
-                    var cos = new CosControl()
+                    var cos = new CosControl(this)
                     {
                         VerticalAlignment = alignment,
                         HorizontalAlignment = HorizontalAlignment.Center,
@@ -355,7 +470,7 @@ namespace FormulaCalculator.Math.Utils
                 case "tan":
                     Children.RemoveAt(focused);
                     Handler.Elements.RemoveAt(focused);
-                    var tan = new TanControl()
+                    var tan = new TanControl(this)
                     {
                         VerticalAlignment = alignment,
                         HorizontalAlignment = HorizontalAlignment.Center,
@@ -368,7 +483,7 @@ namespace FormulaCalculator.Math.Utils
                 case "asin":
                     Children.RemoveAt(focused);
                     Handler.Elements.RemoveAt(focused);
-                    var asin = new ASinControl()
+                    var asin = new ASinControl(this)
                     {
                         VerticalAlignment = alignment,
                         HorizontalAlignment = HorizontalAlignment.Center,
@@ -381,7 +496,7 @@ namespace FormulaCalculator.Math.Utils
                 case "acos":
                     Children.RemoveAt(focused);
                     Handler.Elements.RemoveAt(focused);
-                    var acos = new ACosControl()
+                    var acos = new ACosControl(this)
                     {
                         VerticalAlignment = alignment,
                         HorizontalAlignment = HorizontalAlignment.Center,
@@ -394,7 +509,7 @@ namespace FormulaCalculator.Math.Utils
                 case "atan":
                     Children.RemoveAt(focused);
                     Handler.Elements.RemoveAt(focused);
-                    var atan = new ATanControl()
+                    var atan = new ATanControl(this)
                     {
                         VerticalAlignment = alignment,
                         HorizontalAlignment = HorizontalAlignment.Center,
@@ -408,7 +523,7 @@ namespace FormulaCalculator.Math.Utils
                 case "log":
                     Children.RemoveAt(focused);
                     Handler.Elements.RemoveAt(focused);
-                    var log = new LogControl()
+                    var log = new LogControl(this)
                     {
                         VerticalAlignment = alignment,
                         HorizontalAlignment = HorizontalAlignment.Center,
@@ -421,7 +536,7 @@ namespace FormulaCalculator.Math.Utils
                 case "ln":
                     Children.RemoveAt(focused);
                     Handler.Elements.RemoveAt(focused);
-                    var ln = new LnControl()
+                    var ln = new LnControl(this)
                     {
                         VerticalAlignment = alignment,
                         HorizontalAlignment = HorizontalAlignment.Center,
@@ -435,7 +550,7 @@ namespace FormulaCalculator.Math.Utils
                 case "deg":
                     Children.RemoveAt(focused);
                     Handler.Elements.RemoveAt(focused);
-                    var deg = new DegControl()
+                    var deg = new DegControl(this)
                     {
                         VerticalAlignment = alignment,
                         HorizontalAlignment = HorizontalAlignment.Center,
@@ -482,7 +597,7 @@ namespace FormulaCalculator.Math.Utils
                 case "round":
                     Children.RemoveAt(focused);
                     Handler.Elements.RemoveAt(focused);
-                    var round = new RoundControl()
+                    var round = new RoundControl(this)
                     {
                         VerticalAlignment = alignment,
                         HorizontalAlignment = HorizontalAlignment.Center,
@@ -495,7 +610,7 @@ namespace FormulaCalculator.Math.Utils
                 case "ceil":
                     Children.RemoveAt(focused);
                     Handler.Elements.RemoveAt(focused);
-                    var ceil = new CeilControl()
+                    var ceil = new CeilControl(this)
                     {
                         VerticalAlignment = alignment,
                         HorizontalAlignment = HorizontalAlignment.Center,
@@ -508,7 +623,7 @@ namespace FormulaCalculator.Math.Utils
                 case "floor":
                     Children.RemoveAt(focused);
                     Handler.Elements.RemoveAt(focused);
-                    var floor = new FloorControl()
+                    var floor = new FloorControl(this)
                     {
                         VerticalAlignment = alignment,
                         HorizontalAlignment = HorizontalAlignment.Center,
@@ -547,6 +662,9 @@ namespace FormulaCalculator.Math.Utils
                     break;
                 case "0":
                     (Children[focused] as NumberControl).Insert("0");
+                    break;
+                case "minX":
+                    (Children[focused] as NumberControl).Insert("-");
                     break;
             }
         }

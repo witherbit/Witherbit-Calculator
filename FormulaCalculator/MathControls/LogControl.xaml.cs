@@ -24,11 +24,11 @@ namespace FormulaCalculator.MathControls
     {
         internal Stack ThisStack { get; private set; }
         internal LogElement Element { get; private set; }
-        public LogControl()
+        public LogControl(Stack parent)
         {
             InitializeComponent();
             Element = new LogElement(this);
-            ThisStack = Stack.AddStack(new Stack(uiInput, this));
+            ThisStack = Stack.AddStack(new Stack(uiInput, this) { Parent = parent, InnerIndex = parent.LastFocusedIndex });
             ThisStack.Reset();
         }
     }

@@ -24,11 +24,11 @@ namespace FormulaCalculator.MathControls
     {
         internal Stack ThisStack { get; private set; }
         internal CosElement Element { get; private set; }
-        public CosControl()
+        public CosControl(Stack parent)
         {
             InitializeComponent();
             Element = new CosElement(this);
-            ThisStack = Stack.AddStack(new Stack(uiInput, this));
+            ThisStack = Stack.AddStack(new Stack(uiInput, this) { Parent = parent, InnerIndex = parent.LastFocusedIndex });
             ThisStack.Reset();
         }
     }

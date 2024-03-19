@@ -25,11 +25,11 @@ namespace FormulaCalculator.MathControls
     {
         internal Stack ThisStack { get; private set; }
         internal SqrtElement Element { get; private set; }
-        public SqrtControl()
+        public SqrtControl(Stack parent)
         {
             InitializeComponent();
             Element = new SqrtElement(this);
-            ThisStack = Stack.AddStack(new Stack(uiInput, this));
+            ThisStack = Stack.AddStack(new Stack(uiInput, this) { Parent = parent, InnerIndex = parent.LastFocusedIndex });
             ThisStack.Reset();
         }
     }

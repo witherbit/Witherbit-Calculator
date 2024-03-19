@@ -25,11 +25,11 @@ namespace FormulaCalculator.MathControls
     {
         internal Stack ThisStack { get; private set; }
         internal DegElement Element { get; private set; }
-        public DegControl()
+        public DegControl(Stack parent)
         {
             InitializeComponent();
             Element = new DegElement(this);
-            ThisStack = Stack.AddStack(new Stack(uiInput, this));
+            ThisStack = Stack.AddStack(new Stack(uiInput, this) { Parent = parent, InnerIndex = parent.LastFocusedIndex });
             ThisStack.Reset();
         }
     }

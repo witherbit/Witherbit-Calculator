@@ -8,7 +8,7 @@
              d:DesignHeight="30" d:DesignWidth="30" MinHeight="15" MinWidth="15">
     <Border CornerRadius="5" Background="#2049e8c2" BorderBrush="#9549e8c2" BorderThickness="1" PreviewMouseLeftButtonUp="Border_PreviewMouseLeftButtonUp" Cursor="IBeam">
         <Grid>
-            <TextBox FontFamily="Arial Black" Foreground="White" Text="" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" x:Name="uiInput" CaretBrush="White" Margin="5 0" PreviewTextInput="uiInput_PreviewTextInput" TextChanged="uiInput_TextChanged"  PreviewKeyUp="uiInput_PreviewKeyUp"/>
+            <TextBox FontFamily="Arial Black" Foreground="White" BorderBrush="#9549e8c2" BorderThickness="0" Text="" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" x:Name="uiInput" CaretBrush="White" Margin="5 0" PreviewTextInput="uiInput_PreviewTextInput" TextChanged="uiInput_TextChanged"  PreviewKeyUp="uiInput_PreviewKeyUp"/>
         </Grid>
     </Border>
 </UserControl>

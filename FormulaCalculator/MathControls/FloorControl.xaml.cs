@@ -24,11 +24,11 @@ namespace FormulaCalculator.MathControls
     {
         internal Stack ThisStack { get; private set; }
         internal FloorElement Element { get; private set; }
-        public FloorControl()
+        public FloorControl(Stack parent)
         {
             InitializeComponent();
             Element = new FloorElement(this);
-            ThisStack = Stack.AddStack(new Stack(uiInput, this));
+            ThisStack = Stack.AddStack(new Stack(uiInput, this) { Parent = parent, InnerIndex = parent.LastFocusedIndex });
             ThisStack.Reset();
         }
     }

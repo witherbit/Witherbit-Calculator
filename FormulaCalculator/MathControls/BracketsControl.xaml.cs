@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WhiteByte.Utils;
 
 namespace FormulaCalculator.MathControls
 {
@@ -24,11 +25,14 @@ namespace FormulaCalculator.MathControls
     {
         internal Stack ThisStack { get; private set; }
         internal BracketsElement Element { get; private set; }
-        public BracketsControl()
+        public BracketsControl(Stack parent)
         {
             InitializeComponent();
+            var brushHigh = 0x1000000.GenerateRandomColor().GetBrush();
+            uiHigh1.Foreground = brushHigh;
+            uiHigh2.Foreground = brushHigh;
             Element = new BracketsElement(this);
-            ThisStack = Stack.AddStack(new Stack(uiInput, this));
+            ThisStack = Stack.AddStack(new Stack(uiInput, this) { Parent = parent, InnerIndex = parent.LastFocusedIndex });
             ThisStack.Reset();
         }
     }

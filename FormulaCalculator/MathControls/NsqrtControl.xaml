@@ -7,8 +7,10 @@
              mc:Ignorable="d" 
                                                          d:DesignHeight="30" d:DesignWidth="30" MinHeight="15" MinWidth="15">
     <StackPanel Orientation="Horizontal">
+        <TextBlock Text="┆" VerticalAlignment="Center" Margin="0 0 0 10" Foreground="White" FontFamily="Arial" FontSize="15" x:Name="uiHigh1"/>
         <StackPanel Orientation="Horizontal" x:Name="uiPowInput" VerticalAlignment="Top" Margin="0 0 0 10">
         </StackPanel>
+        <TextBlock Text="┆" VerticalAlignment="Center" Margin="0 0 0 10" Foreground="White" FontFamily="Arial" FontSize="15" x:Name="uiHigh2"/>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="1"/>

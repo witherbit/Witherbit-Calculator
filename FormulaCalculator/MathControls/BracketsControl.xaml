@@ -7,10 +7,10 @@
              mc:Ignorable="d" 
                                                              d:DesignHeight="30" d:DesignWidth="50" MinHeight="15" MinWidth="15">
     <StackPanel Orientation="Horizontal">
-        <TextBlock Text="(" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontFamily="Arial Black" FontSize="18" Margin="1 0"/>
+        <TextBlock Text="(" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontFamily="Arial Black" FontSize="18" Margin="1 0" x:Name="uiHigh1"/>
         <StackPanel Orientation="Horizontal" x:Name="uiInput">
 
         </StackPanel>
-        <TextBlock Text=")" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontFamily="Arial Black" FontSize="18" Margin="1 0"/>
+        <TextBlock Text=")" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontFamily="Arial Black" FontSize="18" Margin="1 0" x:Name="uiHigh2"/>
     </StackPanel>
 </UserControl>

@@ -24,11 +24,11 @@ namespace FormulaCalculator.MathControls
     {
         internal Stack ThisStack { get; private set; }
         internal ATanElement Element { get; private set; }
-        public ATanControl()
+        public ATanControl(Stack parent)
         {
             InitializeComponent();
             Element = new ATanElement(this);
-            ThisStack = Stack.AddStack(new Stack(uiInput, this));
+            ThisStack = Stack.AddStack(new Stack(uiInput, this) { Parent = parent, InnerIndex = parent.LastFocusedIndex });
             ThisStack.Reset();
         }
     }

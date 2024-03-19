@@ -185,5 +185,21 @@ namespace FormulaCalculator
                 stack.GetFocusedElement().Erase();
         }
         #endregion
+
+        private void uiTextSolution_MouseEnter(object sender, MouseEventArgs e)
+        {
+            uiTextSolution.ForegroundFadeTo("#49e8c2".GetBrush(), 0.2);
+        }
+
+        private void uiTextSolution_MouseLeave(object sender, MouseEventArgs e)
+        {
+            uiTextSolution.ForegroundFadeTo("#ffffff".GetBrush(), 0.2);
+        }
+
+        private void uiTextSolution_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            Clipboard.SetText(uiTextSolution.Text);
+            uiTextSolution.ForegroundFadeTo("#9049e8c2".GetBrush(), 0.2);
+        }
     }
 }

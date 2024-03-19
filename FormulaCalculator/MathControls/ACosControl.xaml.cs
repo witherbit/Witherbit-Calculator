@@ -24,11 +24,11 @@ namespace FormulaCalculator.MathControls
     {
         internal Stack ThisStack { get; private set; }
         internal ACosElement Element { get; private set; }
-        public ACosControl()
+        public ACosControl(Stack parent)
         {
             InitializeComponent();
             Element = new ACosElement(this);
-            ThisStack = Stack.AddStack(new Stack(uiInput, this));
+            ThisStack = Stack.AddStack(new Stack(uiInput, this) { Parent = parent, InnerIndex = parent.LastFocusedIndex });
             ThisStack.Reset();
         }
     }

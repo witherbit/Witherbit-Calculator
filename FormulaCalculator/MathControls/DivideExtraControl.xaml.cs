@@ -27,12 +27,12 @@ namespace FormulaCalculator.MathControls
         internal Stack ThisStack { get; private set; }      //стек числителя
         internal Stack ThisLowStack { get; private set; }   //стек знаменателя
         internal DivideElement Element { get; private set; }//элемент
-        public DivideExtraControl()
+        public DivideExtraControl(Stack parent)
         {
             InitializeComponent();
             Element = new DivideElement(this);              //создаем элемент, и передаем ему Instance текущего графического элемента)
-            ThisStack = Stack.AddStack(new Stack(uiInput, this));   //создаем стек числителя
-            ThisLowStack = Stack.AddStack(new Stack(uiLowInput, this)); //создаем стек знаменателя
+            ThisStack = Stack.AddStack(new Stack(uiInput, this) { Parent = parent, InnerIndex = parent.LastFocusedIndex });   //создаем стек числителя
+            ThisLowStack = Stack.AddStack(new Stack(uiLowInput, this) { Parent = parent, InnerIndex = parent.LastFocusedIndex }); //создаем стек знаменателя
             ThisStack.Reset();  //устанавливаем элементы стеков в первоначальное положение
             ThisLowStack.Reset();
         }

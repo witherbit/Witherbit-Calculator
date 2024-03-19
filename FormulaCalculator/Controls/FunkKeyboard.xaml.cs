@@ -122,7 +122,6 @@ namespace FormulaCalculator.Controls
                 case "Phi":
                     button.Background = "#00000000".GetBrush();
                     break;
-                    break;
 
                 default:
                     button.Background = "#ffffff".GetBrush();
@@ -198,6 +197,30 @@ namespace FormulaCalculator.Controls
                     break;
                 case "Floor":
                     OnClick?.Invoke(this, "floor");
+                    break;
+            }
+        }
+
+        private void uiButtonDiv_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            var button = sender as Border;
+            var name = button.Name.Replace("uiButton", "");
+            switch (name)
+            {
+                case "Div":
+                    OnClick?.Invoke(this, "f/");
+                    break;
+                case "Mul":
+                    OnClick?.Invoke(this, "f*");
+                    break;
+                case "Plus":
+                    OnClick?.Invoke(this, "f+");
+                    break;
+                case "Minus":
+                    OnClick?.Invoke(this, "f-");
+                    break;
+                case "Mod":
+                    OnClick?.Invoke(this, "f%");
                     break;
             }
         }

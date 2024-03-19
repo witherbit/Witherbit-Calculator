@@ -67,6 +67,9 @@ namespace FormulaCalculator.MathControls
         {
             if (!IsConstant)
             {
+                if (str == "-" && uiInput.Text.Length > 0 && (uiInput.Text[0] == '-' || char.IsDigit(uiInput.Text[0]) || uiInput.Text[0] == '.'))
+                    return;
+
                 uiInput.Text += str;
                 uiInput_TextChanged(uiInput, null);
                 uiInput.CaretIndex = uiInput.Text.Length;
@@ -97,7 +100,7 @@ namespace FormulaCalculator.MathControls
         {
             if (!IsConstant)
             {
-                Regex regex = new Regex("[^0-9.-]+");
+                Regex regex = new Regex("[^0-9.]+");
                 e.Handled = regex.IsMatch(e.Text);
             }
             else

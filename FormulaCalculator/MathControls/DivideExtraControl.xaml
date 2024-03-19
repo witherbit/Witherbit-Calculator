@@ -7,11 +7,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="30" d:DesignWidth="30" MinHeight="62" MinWidth="15">
     <StackPanel>
-        <StackPanel Orientation="Horizontal" x:Name="uiInput">
+        <StackPanel Orientation="Horizontal" x:Name="uiInput" HorizontalAlignment="Center">
             
         </StackPanel>
         <Grid Height="1" Background="White" Margin="0 3"/>
-        <StackPanel Orientation="Horizontal" x:Name="uiLowInput">
+        <StackPanel Orientation="Horizontal" x:Name="uiLowInput" HorizontalAlignment="Center">
             
         </StackPanel>
     </StackPanel>

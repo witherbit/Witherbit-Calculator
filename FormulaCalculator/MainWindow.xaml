@@ -44,15 +44,10 @@
         </Grid>
         <Border CornerRadius="20" Background="#80171717" Grid.Row="1" Margin="10 10 10 5" BorderBrush="#171717" BorderThickness="3">
             <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="100"/>
-                </Grid.ColumnDefinitions>
-                <StackPanel Orientation="Horizontal" Margin="10" x:Name="uiInputStack">
-                </StackPanel>
-                <Border Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Height="50" Width="50" CornerRadius="100" Background="#49e8c2" x:Name="uiButtonBackscape" MouseEnter="uiButtonBackscape_MouseEnter"  MouseLeave="uiButtonBackscape_MouseLeave"  PreviewMouseLeftButtonUp="uiButtonBackscape_PreviewMouseLeftButtonUp">
-                    <md:PackIcon Foreground="#124035" Height="25" Width="25" Kind="Erase" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                </Border>
+                <ScrollViewer Margin="10" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
+                    <StackPanel Orientation="Horizontal" x:Name="uiInputStack">
+                    </StackPanel>
+                </ScrollViewer>
             </Grid>
         </Border>
         <Border CornerRadius="20" Background="#80171717" Grid.Row="2" Grid.Column="0" Margin="10 0 10 5" BorderBrush="#171717" BorderThickness="3">
@@ -60,11 +55,15 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.23*"/>
                     <ColumnDefinition/>
-                    <ColumnDefinition Width="0.15*"/>
+                    <ColumnDefinition Width="0.10*"/>
+                    <ColumnDefinition Width="0.10*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Text="Решение:" Grid.Column="0" Foreground="#49e8c2" FontFamily="Arial Black" Margin="10 0" FontSize="14"/>
-                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Foreground="White" FontSize="18" FontFamily="Arial Black" x:Name="uiTextSolution"/>
-                <Border Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Height="40" Width="40" CornerRadius="100" Background="#ff956e" x:Name="uiButtonClear" MouseEnter="uiButtonClear_MouseEnter" MouseLeave="uiButtonClear_MouseLeave" PreviewMouseLeftButtonUp="uiButtonClear_PreviewMouseLeftButtonUp">
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Foreground="White" FontSize="18" FontFamily="Arial Black" x:Name="uiTextSolution" MouseEnter="uiTextSolution_MouseEnter" MouseLeave="uiTextSolution_MouseLeave" PreviewMouseLeftButtonUp="uiTextSolution_PreviewMouseLeftButtonUp"/>
+                <Border Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Height="40" Width="40" CornerRadius="100" Background="#49e8c2" x:Name="uiButtonBackscape" MouseEnter="uiButtonBackscape_MouseEnter"  MouseLeave="uiButtonBackscape_MouseLeave"  PreviewMouseLeftButtonUp="uiButtonBackscape_PreviewMouseLeftButtonUp">
+                    <md:PackIcon Foreground="#124035" Height="25" Width="25" Kind="Erase" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Border>
+                <Border Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" Height="40" Width="40" CornerRadius="100" Background="#ff956e" x:Name="uiButtonClear" MouseEnter="uiButtonClear_MouseEnter" MouseLeave="uiButtonClear_MouseLeave" PreviewMouseLeftButtonUp="uiButtonClear_PreviewMouseLeftButtonUp">
                     <TextBlock FontFamily="Arial Black" Text="CE" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#421505"/>
                 </Border>
             </Grid>

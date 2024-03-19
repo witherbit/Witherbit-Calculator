@@ -1,4 +1,5 @@
 ﻿using FormulaCalculator.Math.Operators;
+using FormulaCalculator.Math.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
