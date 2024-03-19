@@ -113,6 +113,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Abouts.xaml.cs">
+      <DependentUpon>Abouts.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\CalcKeyboard.xaml.cs">
       <DependentUpon>CalcKeyboard.xaml</DependentUpon>
     </Compile>
@@ -232,6 +235,10 @@
     <Compile Include="WhiteByte\Tools\MathExpression.cs" />
     <Compile Include="WhiteByte\Utils\Extensions.cs" />
     <Compile Include="WhiteByte\Utils\UiExtensions.cs" />
+    <Page Include="Abouts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\CalcKeyboard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -390,6 +397,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="keys.ico" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Assets\pwitherl.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets')" />

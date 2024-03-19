@@ -21,6 +21,7 @@
             <RowDefinition Height="240"/>
             <RowDefinition Height="60"/>
             <RowDefinition/>
+            <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Background="#191919" x:Name="uiGridTab" MouseLeftButtonDown="uiGridTab_MouseLeftButtonDown" VerticalAlignment="Top" Grid.ColumnSpan="2">
             <TextBlock FontFamily="Arial Black" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5 0">
@@ -86,5 +87,6 @@
                 <TextBlock Text="sin" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial Black" Foreground="Black"/>
             </Border>
         </StackPanel>
+        <TextBlock Text="Abouts" PreviewMouseLeftButtonUp="TextBlock_PreviewMouseLeftButtonUp" Foreground="#49e8c2" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial Black" Cursor="Hand"/>
     </Grid>
 </Window>

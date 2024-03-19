@@ -201,5 +201,10 @@ namespace FormulaCalculator
             Clipboard.SetText(uiTextSolution.Text);
             uiTextSolution.ForegroundFadeTo("#9049e8c2".GetBrush(), 0.2);
         }
+
+        private void TextBlock_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            new Abouts().Show();
+        }
     }
 }
