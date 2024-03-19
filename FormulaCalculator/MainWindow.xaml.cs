@@ -45,7 +45,7 @@ namespace FormulaCalculator
 
         private void OnEvaluate(object sender, string e)                //Обновление текста ответа, этот метод подписан на событие Stack.Evaluate
         {
-            uiTextSolution.Text = e;
+            uiTextSolution.Text = e.Replace("E+", " × 10^");
         }
 
         // Верхний бар (открыть, закрыть, перетаскивать окно)
